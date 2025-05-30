@@ -1,0 +1,13 @@
+const express=require('express')
+const app=express()
+const dotenv=require('dotenv')
+const port=process.env.port||3000
+const mongoose=require('mongoose')
+const authenticate=require('./middleware/authMiddleware')
+const router=require('./routes/authRoutes')
+const connc=require('./db')
+dotenv.config()
+app.use(express.json())
+connc()
+app.use('/auth',router)
+app.listen(port,()=>{console.log('http://localhost:3000')})
